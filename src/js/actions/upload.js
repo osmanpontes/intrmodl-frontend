@@ -1,7 +1,27 @@
 import { createTypes } from '../utils/createTypes'
+import api from '../api'
 
-export const types = createTypes('upload', ['CREATE'])
+export const types = createTypes('upload', [
+  'FETCH_CREATE',
+  'FETCH_CREATE_SUCCESS',
+  'FETCH_CREATE_FAILURE',
+])
 
-export default {
-  types,
+export const fetchCreate = formData => (dispatch) => {
+  dispatch({ type: types.FETCH_CREATE })
+
+  return api.uploads.create(formData)
+    .then(() => {
+      dispatch({ type: types.FETCH_CREATE_SUCCESS })
+    })
+    .catch((error) => {
+      dispatch({
+        type: types.FETCH_CREATE_FAILURE,
+        payload: {
+          error,
+        },
+      })
+
+      throw error
+    })
 }
