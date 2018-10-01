@@ -37,6 +37,7 @@ class ShowCsv extends Component {
 
   render() {
     const { download } = this.props
+    const { error } = download
 
     return (
       <div>
@@ -64,6 +65,9 @@ class ShowCsv extends Component {
         >
           {download.loading ? 'Loading...' : 'More'}
         </button>
+        {
+          error ? <p style={{ color: 'red' }}>{error.message}</p> : null
+        }
       </div>
     )
   }

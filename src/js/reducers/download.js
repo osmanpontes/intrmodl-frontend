@@ -34,9 +34,7 @@ const download = (state = initialState, { type, payload }) => {
       return {
         ...state,
         loading: false,
-        error: payload.error.status === 400
-          ? payload.error.data.error
-          : payload.error.data,
+        error: payload.error.data.error,
       }
     default:
       return state
