@@ -4,6 +4,7 @@ const initialState = {
   loading: false,
   error: null,
   statusCode: null,
+  sentFiles: [],
 }
 
 const upload = (state = initialState, { type, payload }) => {

@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import enhancedConnect from '../hoc/enhancedConnect'
 import { fetchCreate } from '../actions/upload'
+import Table from './Table'
 
 const Errors = ({ errors }) => errors.map(error => (
-  <p style={{ color: 'red' }}>{error.message}</p>
+  <p key={error.index} style={{ color: 'red' }}>{error.message}</p>
 ))
 
 @enhancedConnect(state => ({
@@ -52,6 +53,18 @@ class UploadCsv extends Component {
         </form>
         {
           Array.isArray(error) ? <Errors errors={error} /> : error
+        }
+        {
+          upload.sentFiles.length === 0 ? null : (
+            <Table
+              header={[
+                { key: 'id', name: 'id' },
+                { key: 'name', name: 'name' },
+                { key: 'created_at', name: 'created_at' },
+              ]}
+              values={upload.sentFiles}
+            />
+          )
         }
       </div>
     )

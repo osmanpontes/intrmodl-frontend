@@ -11,8 +11,11 @@ export const fetchCreate = formData => (dispatch) => {
   dispatch({ type: types.FETCH_CREATE })
 
   return api.uploads.create(formData)
-    .then(() => {
-      dispatch({ type: types.FETCH_CREATE_SUCCESS })
+    .then((payload) => {
+      dispatch({
+        type: types.FETCH_CREATE_SUCCESS,
+        payload,
+      })
     })
     .catch((error) => {
       dispatch({
